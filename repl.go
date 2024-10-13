@@ -10,26 +10,30 @@ import (
 type cliCommand struct {
 	name        string
 	description string
-	callback    func() error
+	callback    func()
 }
 
 func startRepl() {
-
+	scanner := bufio.NewScanner(os.Stdin)
 	for {
-		scanner := bufio.NewScanner(os.Stdin)
-
 		fmt.Print(">")
-
 		scanner.Scan()
 		text := scanner.Text()
-		fmt.Println("echoing: ", text)
 
-		commands := getCommands()
-
-		switch text {
-		case "help":
-			fmt.Println(commands[text].name)
+		cleaned := cleanInput(text)
+		if len(cleaned) == 0 {
+			continue
 		}
+
+		commandName := cleaned[0]
+		availableCommands := getCommands()
+
+		command, ok := availableCommands[commandName]
+		if !ok {
+			fmt.Println("invalid command")
+			continue
+		}
+		command.callback()
 	}
 }
 
@@ -37,27 +41,15 @@ func getCommands() map[string]cliCommand {
 	return map[string]cliCommand{
 		"help": {
 			name:        "help",
-			description: "help commands",
-			callback:    commandHelp,
+			description: "list of available commands",
+			callback:    callbackHelp,
 		},
 		"exit": {
 			name:        "exit",
 			description: "exit application",
-			callback: func() error {
-				os.Exit(0)
-				return nil
-			},
+			callback:    calbackExit,
 		},
 	}
-}
-
-func commandHelp() error {
-	fmt.Println("Welcome to the pokedex help menu!")
-	fmt.Println("Here are your available commands:")
-	fmt.Println("- help")
-	fmt.Println("- exit")
-	fmt.Println("")
-	return nil
 }
 
 func cleanInput(str string) []string {
