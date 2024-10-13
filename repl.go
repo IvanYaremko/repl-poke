@@ -10,7 +10,7 @@ import (
 type cliCommand struct {
 	name        string
 	description string
-	callback    func()
+	callback    func() error
 }
 
 func startRepl() {
@@ -29,11 +29,15 @@ func startRepl() {
 		availableCommands := getCommands()
 
 		command, ok := availableCommands[commandName]
-		if !ok {
-			fmt.Println("invalid command")
+		if ok {
+			err := command.callback()
+			if err != nil {
+				fmt.Println(err)
+			}
 			continue
+		} else {
+			fmt.Println("invalid command")
 		}
-		command.callback()
 	}
 }
 
