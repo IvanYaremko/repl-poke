@@ -2,7 +2,7 @@ package main
 
 import "os"
 
-func calbackExit() error {
+func calbackExit(cfg *config) error {
 	os.Exit(0)
 	return nil
 }
