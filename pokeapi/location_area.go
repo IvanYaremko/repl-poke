@@ -8,10 +8,6 @@ import (
 )
 
 func (c *Client) LocationArea(locationId string) (ResLocationsArea, error) {
-	if locationId == "" {
-		return ResLocationsArea{}, fmt.Errorf("invalid locationid: %s", locationId)
-	}
-
 	cachedData, ok := c.cache.Get(locationId)
 	if ok {
 		areaData := ResLocationsArea{}
