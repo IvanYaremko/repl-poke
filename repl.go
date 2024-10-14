@@ -11,8 +11,8 @@ import (
 
 type config struct {
 	pokeapiClient   pokeapi.Client
-	nextLocationUrl string
-	prevLocationUrl string
+	nextLocationUrl *string
+	prevLocationUrl *string
 }
 
 type cliCommand struct {
