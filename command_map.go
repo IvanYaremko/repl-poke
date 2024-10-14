@@ -7,7 +7,7 @@ import (
 	"github.com/IvanYaremko/repl-poke/pokeapi"
 )
 
-func mapf(cfg *config) error {
+func mapf(cfg *config, args ...string) error {
 	response, err := cfg.pokeapiClient.ListLocations(cfg.nextLocationUrl)
 	if err != nil {
 		return fmt.Errorf("error in mapf respone: %w", err)
@@ -22,7 +22,7 @@ func mapf(cfg *config) error {
 	return nil
 }
 
-func mapb(cfg *config) error {
+func mapb(cfg *config, args ...string) error {
 	if cfg.prevLocationUrl == nil {
 		return errors.New("you are on the first page")
 	}
@@ -40,7 +40,7 @@ func mapb(cfg *config) error {
 	return nil
 }
 
-func formatMapMessage(location pokeapi.RespLocationsAreaResults) string {
+func formatMapMessage(location pokeapi.RespLocationsListResults) string {
 	format := fmt.Sprintf("Name: %s", location.Name)
 	fmt.Println(format)
 	return format
