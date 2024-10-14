@@ -3,6 +3,8 @@ package main
 import (
 	"errors"
 	"fmt"
+
+	"github.com/IvanYaremko/repl-poke/pokeapi"
 )
 
 func mapf(cfg *config) error {
@@ -15,8 +17,7 @@ func mapf(cfg *config) error {
 	cfg.prevLocationUrl = &response.Previous
 
 	for _, loc := range response.Results {
-		fmString := fmt.Sprintf("Name:	%s\nURL:%s\n", loc.Name, loc.URL)
-		fmt.Println(fmString)
+		formatMapMessage(loc)
 	}
 	return nil
 }
@@ -34,8 +35,13 @@ func mapb(cfg *config) error {
 	cfg.prevLocationUrl = &response.Previous
 
 	for _, loc := range response.Results {
-		fmString := fmt.Sprintf("Name:	%s\nURL:%s\n", loc.Name, loc.URL)
-		fmt.Println(fmString)
+		formatMapMessage(loc)
 	}
 	return nil
+}
+
+func formatMapMessage(location pokeapi.RespLocationsAreaResults) string {
+	format := fmt.Sprintf("Name: %s", location.Name)
+	fmt.Println(format)
+	return format
 }
