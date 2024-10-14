@@ -24,7 +24,7 @@ type cliCommand struct {
 func startRepl(cfg *config) {
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
-		fmt.Print(">")
+		fmt.Print("poke >")
 		scanner.Scan()
 		text := scanner.Text()
 
@@ -60,6 +60,16 @@ func getCommands() map[string]cliCommand {
 			name:        "exit",
 			description: "exit application",
 			callback:    calbackExit,
+		},
+		"mapf": {
+			name:        "map forward",
+			description: "locations area of the world",
+			callback:    mapf,
+		},
+		"mapb": {
+			name:        "map back",
+			description: "locations area of the world",
+			callback:    mapb,
 		},
 	}
 }
