@@ -14,6 +14,17 @@ func (c *Client) ListLocations(pageUrl *string) (RespLocationsArea, error) {
 		url = *pageUrl
 	}
 
+	val, ok := c.cache.Get(url)
+	if ok {
+		response := RespLocationsArea{}
+		err := json.Unmarshal(val, &response)
+		if err != nil {
+			return RespLocationsArea{}, err
+		}
+
+		return response, nil
+	}
+
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
 		return RespLocationsArea{}, fmt.Errorf("error creating request: %w", err)
@@ -30,11 +41,11 @@ func (c *Client) ListLocations(pageUrl *string) (RespLocationsArea, error) {
 		return RespLocationsArea{}, fmt.Errorf("error reading body: %w", err)
 	}
 
-	marshalled := RespLocationsArea{}
-	err = json.Unmarshal(data, &marshalled)
+	response := RespLocationsArea{}
+	err = json.Unmarshal(data, &response)
 	if err != nil {
 		return RespLocationsArea{}, fmt.Errorf("error unmarshalling data: %w", err)
 	}
 
-	return marshalled, nil
+	return response, nil
 }
