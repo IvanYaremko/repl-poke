@@ -25,7 +25,7 @@ type cliCommand struct {
 func startRepl(cfg *config) {
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
-		fmt.Print("poke >")
+		fmt.Print("poke > ")
 		scanner.Scan()
 		text := scanner.Text()
 
@@ -80,6 +80,11 @@ func getCommands() map[string]cliCommand {
 			name:        "explore",
 			description: "explore given area name",
 			callback:    commandExplore,
+		},
+		"catch": {
+			name:        "catch",
+			description: "attempt to catch pokemon",
+			callback:    commandCatch,
 		},
 	}
 }
