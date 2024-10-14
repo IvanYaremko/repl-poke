@@ -24,6 +24,7 @@ func commandCatch(cfg *config, args ...string) error {
 	base := rand.IntN(pokemon.BaseExperience)
 	target := float64(pokemon.BaseExperience) * 0.33
 
+	fmt.Printf("throwing a ball at %s...\n", pokemon.Name)
 	if base > int(target) {
 		message := fmt.Sprintf("\U0001F386 \U0001F386 \U0001F386 caught: %s \U0001F386 \U0001F386 \U0001F386", pokemon.Name)
 		fmt.Println(message)
