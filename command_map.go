@@ -12,7 +12,6 @@ func mapf(cfg *config, args ...string) error {
 	if err != nil {
 		return fmt.Errorf("error in mapf respone: %w", err)
 	}
-
 	cfg.nextLocationUrl = &response.Next
 	cfg.prevLocationUrl = &response.Previous
 
