@@ -13,7 +13,6 @@ func commandInspect(cfg *config, args ...string) error {
 	if !ok {
 		return fmt.Errorf("you have not caught %s", name)
 	}
-
 	printPokemonDetails(pokemon)
 	return nil
 }
