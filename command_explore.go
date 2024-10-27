@@ -11,13 +11,11 @@ func commandExplore(cfg *config, args ...string) error {
 	if len(args) != 1 {
 		return errors.New("you must provide a location name")
 	}
-
 	locationId := args[0]
 	response, err := cfg.pokeapiClient.LocationArea(locationId)
 	if err != nil {
 		return fmt.Errorf("command explore error: %w", err)
 	}
-
 	printEncounters(response.PokemoneEncounters)
 	return nil
 }
