@@ -7,7 +7,6 @@ import (
 
 func commandPokedex(cfg *config, args ...string) error {
 	collection := cfg.caughtPokemon
-
 	if len(collection) == 0 {
 		return errors.New("no pokemon in collection")
 	}
