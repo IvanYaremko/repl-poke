@@ -15,7 +15,6 @@ func TestFormatMapLocation(t *testing.T) {
 			Name: "location-1-name",
 			URL:  "location-1-url",
 		},
-
 		expected: "Name: location-1-name",
 	}
 	actual := formatMapMessage(testData.input)
