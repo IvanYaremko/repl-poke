@@ -18,7 +18,6 @@ func TestFormatMapLocation(t *testing.T) {
 
 		expected: "Name: location-1-name",
 	}
-
 	actual := formatMapMessage(testData.input)
 	if actual != testData.expected {
 		t.Errorf("Actual not equal to expexted\nActual:	%s\nExpected: %s", actual, testData.expected)
